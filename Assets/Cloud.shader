@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Cloudo2" {
+﻿Shader "Custom/Volumetric Cloud" {
 	Properties {
         _Volume ("Texture", 3D) = "" {}
 	}
@@ -34,7 +34,7 @@
 
             float evalCloud(float3 pos)
             {
-                return tex3D(_Volume, 0.5*pos + float3(0.5,0.5,0.5)); // *clamp(1 - length(pos), 0, 1);
+                return tex3D(_Volume, 0.5*pos + float3(0.5,0.5,0.5));
             }
 
             float integrate(float3 ro, float3 rd)
