@@ -1,20 +1,20 @@
 ﻿Shader "Custom/Volumetric Cloud" {
-	Properties {
+    Properties {
         _Volume ("Texture", 3D) = "" {}
-	}
-	SubShader {
+    }
+    SubShader {
         Tags {"Queue"="Transparent" "RenderType"="Transparent" }
-		LOD 100
+        LOD 100
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
 
-		Pass {
+        Pass {
         CGPROGRAM
 
             #pragma vertex vert
             #pragma fragment frag
-			
-			#include "UnityCG.cginc"
+
+            #include "UnityCG.cginc"
 
             struct appdata {
                 float4 vertex : POSITION;
@@ -50,7 +50,7 @@
                 return accum / STEP_COUNT;
             }
 
-            v2f vert(appdata v) 
+            v2f vert(appdata v)
             {
                 v2f o;
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex);
@@ -59,7 +59,7 @@
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target 
+            fixed4 frag(v2f i) : SV_Target
             {
                 float3 dir = normalize(i.worldPos.xyz - _WorldSpaceCameraPos);
                 float linearDensity = integrate(i.worldPos.xyz, dir);
@@ -68,6 +68,6 @@
             }
 
         ENDCG
-		}
-	}
+        }
+    }
 }

@@ -12,7 +12,7 @@ public class Load3DTexture : MonoBehaviour
         Load();
     }
 
-    public void Load() 
+    public void Load()
     {
         float softWidth = gridTexture.width / cellCountX;
         float softHeight = gridTexture.height / cellCountY;
@@ -20,7 +20,7 @@ public class Load3DTexture : MonoBehaviour
         int width = (int)softWidth;
         int height = (int)softHeight;
         int depth = cellCountX * cellCountY;
-        
+
         var texture3d = new Texture3D(width, height, depth, TextureFormat.ARGB32, false);
         var colors = new Color[width * height * depth];
 
@@ -41,5 +41,5 @@ public class Load3DTexture : MonoBehaviour
         texture3d.Apply();
 
         GetComponent<Renderer>().sharedMaterial.SetTexture(textureUniformName, texture3d);
-	}
+    }
 }
